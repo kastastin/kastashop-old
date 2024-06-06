@@ -2,11 +2,71 @@
   "ua": {
     "header": {
       "menu_btn": "Меню"
+    },
+    "main_menu": {
+      "catalog": "Каталог",
+      "buyers": "Для покупців",
+      "contacts": "Контакти",
+      "clothes": "Одяг",
+      "accessories": "Аксесуари",
+      "souvenirs": "Сувеніри",
+      "office": "Офіс",
+      "all": "Весь каталог",
+      "about": "Про нас",
+      "blog": "Блог",
+      "shipping": "Доставка та оплата",
+      "returns": "Повернення покупки",
+      "tg": "Телеграм",
+      "tt": "ТікТок"
+    },
+    "comparison": {
+      "umbrella": "Парасольки",
+      "bags": "Сумки",
+      "outerwear": "Верхній одяг",
+      "long-sleeves": "Лонгсливи",
+      "headdress": "Головні убори",
+      "hoodie": "Худі",
+      "business-souvenirs": "Бізнес-сувеніри",
+      "promotional-souvenirs": "Промо-сувеніри",
+      "pen": "Ручки",
+      "notebook": "Блокноти",
+      "t-shirts": "Футболки",
+      "main_heading": "Порівняння"
     }
   },
   "en": {
     "header": {
       "menu_btn": "Menu"
+    },
+    "main_menu": {
+      "catalog": "Catalog",
+      "buyers": "For buyers",
+      "contacts": "Contacts",
+      "clothes": "Clothes",
+      "accessories": "Accessories",
+      "souvenirs": "Souvenirs",
+      "office": "Office",
+      "all": "All catalog",
+      "about": "About",
+      "blog": "Blog",
+      "shipping": "Shipping and payment",
+      "returns": "Purchase returns",
+      "tg": "Telegram",
+      "tt": "TikTok"
+    },
+    "comparison": {
+      "umbrella": "Umbrellas",
+      "bags": "Bags",
+      "outerwear": "Outerwear",
+      "long-sleeves": "Long-sleeves",
+      "headdress": "Headdress",
+      "hoodie": "Hoodie",
+      "business-souvenirs": "Business-souvenirs",
+      "promotional-souvenirs": "Promotional-souvenirs",
+      "pen": "Pens",
+      "notebook": "Notebooks",
+      "t-shirts": "T-shirts",
+      "main_heading": "Comparison"
     }
   }
 }

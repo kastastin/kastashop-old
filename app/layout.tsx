@@ -3,6 +3,7 @@ import { Comfortaa } from 'next/font/google'
 
 import Layout from '@/components/layouts/Layout'
 import './globals.css'
+import './styles/menu.css'
 
 const comfortaa = Comfortaa({ subsets: ['latin'] })
 
