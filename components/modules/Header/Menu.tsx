@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { useUnit } from 'effector-react'
 import { CircleX } from 'lucide-react'
@@ -9,14 +10,27 @@ import { setLanguage } from '@/context/lang'
 import { $isMenuOpen, closeMenu } from '@/context/modals'
 import { removeOverflowHiddenFromBody } from '@/lib/utils/common'
 import { AllowedLanguages } from '@/constants/lang'
+
 import Logo from '@/components/elements/Logo'
+import Accordion from '@/components/modules/Accordion'
+import MenuLinkItem from '@/components/modules/Header/MenuLinkItem'
 
 export default function Menu() {
+  const pathname = usePathname()
   const isMenuOpen = useUnit($isMenuOpen)
   const { language, translations } = useLang()
   const [showCatalogList, setShowCatalogList] = useState(false)
   const [showBuyerList, setShowBuyerList] = useState(false)
   const [showContactsList, setShowContactsList] = useState(false)
+
+  function handleRedirectToCatalog(path: string) {
+    if (pathname.includes('/catalog')) {
+      window.history.pushState({ path }, '', path)
+      window.location.reload()
+    }
+
+    handleCloseMenu()
+  }
 
   function handleCloseMenu() {
     removeOverflowHiddenFromBody()
@@ -30,6 +44,12 @@ export default function Menu() {
 
   const handleSwitchLanguageToUa = () => handleSwitchLanguage('ua')
   const handleSwitchLanguageToEn = () => handleSwitchLanguage('en')
+
+  function handleShowCatalogList() {
+    setShowCatalogList(true)
+    setShowBuyerList(false)
+    setShowBuyerList(false)
+  }
 
   const clothLinks = [
     {
@@ -133,29 +153,96 @@ export default function Menu() {
           >
             EN
           </button>
-
-          <ul className={`nav-menu__list ${isMenuOpen ? 'open' : ''}`}>
-            <li className='nav-menu__list__item'>
-              <button className='nav-menu__list__item__btn'>
-                {translations[language].main_menu.catalog}
-                <AnimatePresence>
-                  {showCatalogList && (
-                    <motion.ul
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className='nav-menu__accordion'
-                    >
-                      <li className='nav-menu__accordion__item'>...</li>
-                    </motion.ul>
-                  )}
-                </AnimatePresence>
-              </button>
-            </li>
-            {/* <li className='nav-menu__list__item'></li>
-            <li className='nav-menu__list__item'></li> */}
-          </ul>
         </div>
+
+        <ul className={`nav-menu__list ${isMenuOpen ? 'open' : ''}`}>
+          <li className='nav-menu__list__item'>
+            <button
+              className='nav-menu__list__item__btn'
+              onMouseEnter={handleShowCatalogList}
+            >
+              {translations[language].main_menu.catalog}
+              <AnimatePresence>
+                {showCatalogList && (
+                  <motion.ul
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className='nav-menu__accordion'
+                  >
+                    <li className='nav-menu__accordion__item'>
+                      <Accordion
+                        titleClass='nav-menu__accordion__item__title'
+                        title={translations[language].main_menu.cloth}
+                      >
+                        <ul className='nav-menu__accordion__item__list'>
+                          {clothLinks.map((item) => (
+                            <MenuLinkItem
+                              key={item.id}
+                              item={item}
+                              handleRedirectToCatalog={handleRedirectToCatalog}
+                            />
+                          ))}
+                        </ul>
+                      </Accordion>
+                    </li>
+
+                    <li className='nav-menu__accordion__item'>
+                      <Accordion
+                        titleClass='nav-menu__accordion__item__title'
+                        title={translations[language].main_menu.accessories}
+                      >
+                        <ul className='nav-menu__accordion__item__list'>
+                          {accessoriesLinks.map((item) => (
+                            <MenuLinkItem
+                              key={item.id}
+                              item={item}
+                              handleRedirectToCatalog={handleRedirectToCatalog}
+                            />
+                          ))}
+                        </ul>
+                      </Accordion>
+                    </li>
+
+                    <li className='nav-menu__accordion__item'>
+                      <Accordion
+                        titleClass='nav-menu__accordion__item__title'
+                        title={translations[language].main_menu.souvenirs}
+                      >
+                        <ul className='nav-menu__accordion__item__list'>
+                          {souvenirsLinks.map((item) => (
+                            <MenuLinkItem
+                              key={item.id}
+                              item={item}
+                              handleRedirectToCatalog={handleRedirectToCatalog}
+                            />
+                          ))}
+                        </ul>
+                      </Accordion>
+                    </li>
+
+                    <li className='nav-menu__accordion__item'>
+                      <Accordion
+                        titleClass='nav-menu__accordion__item__title'
+                        title={translations[language].main_menu.office}
+                      >
+                        <ul className='nav-menu__accordion__item__list'>
+                          {officeLinks.map((item) => (
+                            <MenuLinkItem
+                              key={item.id}
+                              item={item}
+                              handleRedirectToCatalog={handleRedirectToCatalog}
+                            />
+                          ))}
+                        </ul>
+                      </Accordion>
+                    </li>
+                  </motion.ul>
+                )}
+              </AnimatePresence>
+            </button>
+          </li>
+        </ul>
       </div>
     </nav>
   )
