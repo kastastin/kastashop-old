@@ -6,6 +6,7 @@ import { CircleX } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { useLang } from '@/hooks/useLang'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { setLanguage } from '@/context/lang'
 import { $isMenuOpen, closeMenu } from '@/context/modals'
 import { removeOverflowHiddenFromBody } from '@/lib/utils/common'
@@ -22,6 +23,7 @@ export default function Menu() {
   const [showCatalogList, setShowCatalogList] = useState(false)
   const [showBuyerList, setShowBuyerList] = useState(false)
   const [showContactsList, setShowContactsList] = useState(false)
+  const isMedia800 = useMediaQuery(800)
 
   function handleRedirectToCatalog(path: string) {
     if (pathname.includes('/catalog')) {
